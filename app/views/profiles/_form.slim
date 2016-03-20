@@ -1,0 +1,21 @@
+= form_for :profile, url: profiles_path do |f|
+  p First Name
+  =f.text_field :first_name
+
+  p Last Name
+  =f.text_field :last_name
+
+  p Email
+  =f.text_field :email
+
+  p Phone
+  =f.text_field :phone
+
+  p Current Country
+  =f.autocomplete_field :country, autocomplete_location_country_profiles_path
+
+  p Current City
+  =f.autocomplete_field :city, autocomplete_location_city_profiles_path
+ 
+  p 
+    =f.submit

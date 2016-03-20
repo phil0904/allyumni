@@ -1,0 +1,23 @@
+h1 List of Alumni
+table
+  tr
+    th First Name
+    th Last Name
+    th Email
+    th Phone
+    th Current Country
+    th Current City
+  - @profiles.each do |profile|
+    tr
+      td
+        =profile.first_name
+      td
+        =profile.last_name
+      td
+        =profile.email
+      td
+        =profile.phone
+      td
+        =profile.country
+      td
+        =profile.city
