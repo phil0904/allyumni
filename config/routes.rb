@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
+
+  devise_for :users
   resources :profiles do
-    get :autocomplete_location_country, :on => :collection
-    get :autocomplete_location_city, :on => :collection
+    resources :educations do
+    end
+    resources :experiences do
+    end
+    get :autocomplete_profile_country, :on => :collection
+    get :autocomplete_profile_city, :on => :collection
+    get :autocomplete_education_name, :on => :collection
+    get :autocomplete_education_major, :on => :collection
+    get :autocomplete_experience_company_name, :on => :collection
+    get :autocomplete_experience_title, :on => :collection
+    get :autocomplete_experience_country, :on => :collection
+    get :autocomplete_experience_city, :on => :collection
   end
   root 'profiles#new'
   # The priority is based upon order of creation: first created -> highest priority.

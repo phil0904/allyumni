@@ -1,23 +1,52 @@
-h1 List of Alumni
-table
-  tr
-    th First Name
-    th Last Name
-    th Email
-    th Phone
-    th Current Country
-    th Current City
-  - @profiles.each do |profile|
-    tr
-      td
-        =profile.first_name
-      td
-        =profile.last_name
-      td
-        =profile.email
-      td
-        =profile.phone
-      td
-        =profile.country
-      td
-        =profile.city
+div class="container main"
+  div class="row"
+    div class="col-xs-12"
+      h1 List of Alumni
+      div class="row"
+        =form_tag profiles_path, :method => 'get' do
+          div class="col-xs-6 col-sm-6 col-md-6"
+            div class="form-group"
+              =text_field_tag :search_school, params[:search_school], class:"form-control input-lg", placeholder: "Search School"
+          div class="col-xs-6 col-sm-6 col-md-6"
+            div class="form-group"
+              =text_field_tag :search_company, params[:search_company], class:"form-control input-lg", placeholder: "Search Company"
+          div class="form-group"
+            =submit_tag 'Search', :name=>nil, :class=>"btn btn-primary btn-block btn-lg"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Name
+              th Current Location
+              th Education
+              th Company
+              th Full Info
+              -if current_user.admin?
+                th Edit
+                th Delete
+          tbody
+            - @profiles.each do |profile|
+              tr
+                td
+                  =profile.first_name
+                  |&nbsp
+                  =profile.last_name
+                td
+                  =profile.city
+                  |,&nbsp
+                  =profile.country
+                td
+                  - profile.educations.each do |education|
+                    =education.name
+                    br
+                td
+                  - profile.experiences.each do |experience|
+                    =experience.company_name
+                    br
+                td
+                  =link_to 'Full Info', profile_path(profile), class: "btn btn-primary-outline btn-sm"
+                -if current_user.admin?
+                  td
+                    =link_to 'Edit', edit_profile_path(profile), class: "btn btn-warning-outline btn-sm"
+                  td
+                    =link_to 'Delete', profile_path(profile), method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger-outline btn-sm"

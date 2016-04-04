@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="http://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
   <title>Allyumni</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <!--<![endif]-->
 </head>
 <body>
-
+  <div class="pos-f-t">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Alumconnect</a>
+        <button class="navbar-toggler hidden-md-up pull-xs-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" style="color:white;">
+            &#9776;
+          </button>
+        <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
+          <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 <%= yield %>
 
 </body>
