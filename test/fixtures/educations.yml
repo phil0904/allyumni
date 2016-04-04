@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  name: MyString
+  start_month: 1
+  start_year: MyString
+  integer: MyString
+  profile_id: 
+
+two:
+  type: 
+  name: MyString
+  start_month: 1
+  start_year: MyString
+  integer: MyString
+  profile_id: 

@@ -1,0 +1,14 @@
+ = form_for([@profile, @profile.educations.build]) do |f|
+  p School Type
+  = f.select :type, ['High School', 'Undergraduate', 'Graduate']
+
+  p School Name
+  =f.autocomplete_field :name, autocomplete_education_name_educations_path
+
+  p Graduation Year (Expected)
+  =f.text_field :end_year
+
+  p Major
+  =f.text_field :major
+  p 
+  =f.submit

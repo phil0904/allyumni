@@ -11,18 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320021456) do
+ActiveRecord::Schema.define(version: 20160403065518) do
 
-  create_table "locations", force: :cascade do |t|
-    t.string   "country"
-    t.string   "state"
-    t.string   "city"
+  create_table "educations", force: :cascade do |t|
+    t.string   "school_type"
+    t.string   "name"
+    t.string   "major"
+    t.integer  "end_year"
     t.integer  "profile_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "locations", ["profile_id"], name: "index_locations_on_profile_id"
+  add_index "educations", ["profile_id"], name: "index_educations_on_profile_id"
+
+  create_table "experiences", force: :cascade do |t|
+    t.string   "job_type"
+    t.string   "company_name"
+    t.string   "title"
+    t.string   "country"
+    t.string   "city"
+    t.integer  "start_month"
+    t.integer  "start_year"
+    t.integer  "end_month"
+    t.integer  "end_year"
+    t.boolean  "is_present"
+    t.string   "industry"
+    t.integer  "profile_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "experiences", ["profile_id"], name: "index_experiences_on_profile_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
@@ -33,6 +53,28 @@ ActiveRecord::Schema.define(version: 20160320021456) do
     t.string   "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "admin"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

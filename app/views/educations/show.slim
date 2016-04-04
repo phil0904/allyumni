@@ -1,0 +1,25 @@
+h1 Add Education
+table
+  tr
+    th First Name
+    th Last Name
+    th Email
+    th Phone
+    th Current Country
+    th Current City
+  tr
+    td
+      =@profile.first_name
+    td
+      =@profile.last_name
+    td
+      =@profile.email
+    td
+      =@profile.phone
+    td
+      =@profile.country
+    td
+      =@profile.city
+=render 'form'
+
+= link_to 'Back', profiles_path

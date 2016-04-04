@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'slim'
 # Search Auto Complete
 gem 'rails3-jquery-autocomplete'
+# Jquery-ui-rails
+gem 'jquery-ui-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -26,6 +28,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# add devise
+gem 'devise'
+# add rails_admin
+gem 'rails_admin'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
