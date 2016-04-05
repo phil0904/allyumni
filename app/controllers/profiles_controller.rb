@@ -10,15 +10,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
 	def index
-    if (params[:search_school].present? && params[:search_company].present?)
-      @profiles = Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('educations.name LIKE ? AND experiences.company_name LIKE ?', "%#{params[:search_school]}%", "%#{params[:search_company]}%").group("profiles.id")
-    elsif (params[:search_school].present? && params[:search_company].blank?)
-      @profiles = Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id').where('educations.name LIKE ?', "%#{params[:search_school]}%").group("profiles.id")
-    elsif (params[:search_company].present? && params[:search_school].blank?)
-      @profiles = Profile.joins('LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('experiences.company_name LIKE ?', "%#{params[:search_company]}%").group("profiles.id")
-    else
-      @profiles=Profile.all
-    end
+    @profiles=Profile.search(params[:search_school],params[:search_company])
   end
 
   def show
