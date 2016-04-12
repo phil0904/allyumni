@@ -50,9 +50,9 @@ hr class="colorgraph"
         div class="form-group"
           =e.text_field :end_year, class:"form-control input-lg", placeholder: "Graduation Year (Expected)"
         =e.text_field :_destroy, :value =>0, :class=>'delete_education', :style=>'display:none;'
-        div class="btn btn-danger btn-block delete-education-btn" Delete Education
+        div class="btn btn-danger btn-block delete-education-btn" Delete This School
         hr
-  div class="btn btn-primary btn-block" id="add-education-btn" Add Education
+  div class="btn btn-primary btn-block" id="add-education-btn" Add Additional School
   hr
   br
   h2 Experience
@@ -85,10 +85,10 @@ hr class="colorgraph"
               =exp.text_field :end_year, class:"form-control input-lg", placeholder: "Start Year"
 
         =exp.text_field :_destroy, :value =>0, :class=>'delete_experience', :style=>'display:none;'
-        div class="btn btn-danger btn-block delete-experience-btn" Delete Experiecne
+        div class="btn btn-danger btn-block delete-experience-btn" Delete This Experiecne
         hr
 
-  div class="btn btn-primary btn-block" id="add-experience-btn" Add Experience
+  div class="btn btn-primary btn-block" id="add-experience-btn" Add Additional Experience
 
   hr class="colorgraph"
   
@@ -172,7 +172,7 @@ script id='education-template' type='x-tmpl-mustache'
     div class="form-group"
       input class="form-control input-lg" placeholder="Graduation Year (Expected)" type="text" name="profile[educations_attributes][{{education_index}}][end_year]" id="profile_educations_attributes_{{education_index}}_end_year"
     input value="0" class="delete_education" style="display:none;" type="text" name="profile[educations_attributes][{{education_index}}][_destroy]" id="profile_educations_attributes_{{education_index}}__destroy"
-    div class="btn btn-danger btn-block delete-education-btn" name="delete_education{{education_index}}" Delete Education
+    div class="btn btn-danger btn-block delete-education-btn" name="delete_education{{education_index}}" Delete This Education
     hr
 
 script id='experience-template' type='x-tmpl-mustache'
@@ -232,5 +232,5 @@ script id='experience-template' type='x-tmpl-mustache'
         div class="form-group"
           input class="form-control input-lg" placeholder="End Year" type="text" name="profile[experiences_attributes][{{experience_index}}][end_year]" id="profile_experiences_attributes_{{experience_index}}_end_year"
     input value="0" class="delete_experience" style="display:none;" type="text" name="profile[experiences_attributes][{{experience_index}}][_destroy]" id="profile_experiences_attributes_{{experience_index}}__destroy"
-    div class="btn btn-danger btn-block delete-experience-btn" name="delete_experience{{experience_index}}" Delete Experiecne
+    div class="btn btn-danger btn-block delete-experience-btn" name="delete_experience{{experience_index}}" Delete This Experiecne
     hr
