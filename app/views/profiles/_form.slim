@@ -23,6 +23,12 @@ hr class="colorgraph"
   div class="form-group"
     =f.text_field :phone, class:"form-control input-lg", placeholder: "Phone Number"
 
+  div class="form-group"
+    =f.text_field :linkedin_url, class:"form-control input-lg url", placeholder: "Your LinkedIn Profile URL"
+
+  div class="form-group"
+    =f.text_field :facebook_url, class:"form-control input-lg url", placeholder: "Your Facebook Profile URL"
+
   div class="row"
     div class="col-xs-6 col-sm-6 col-md-6"
       div class="form-group"
@@ -133,6 +139,10 @@ javascript:
       var country = $('.country').val().toLowerCase()
       if(country == 'united states'||country == 'usa')
         $('.country').parents('.row').children('.profile-state').show();
+    });
+    $('.url').focusout( function(){
+      if($(this).val().indexOf("http") <0 && $(this).val().length>0)
+        $(this).val('https://'+$(this).val())
     });
     $('body').on('click', '.delete-education-btn', function(delete_edu){
       $(delete_edu.target).parents('.education').children('.delete_education').val(1);

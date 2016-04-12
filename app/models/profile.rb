@@ -7,13 +7,13 @@ class Profile < ActiveRecord::Base
 
 	belongs_to :user
 
-	def self.search(search_school,search_company)
-    if (search_school.present? && search_company.present?)
-      Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('lower(educations.name) LIKE ? AND lower(experiences.company_name) LIKE ?', "%#{search_school}%".downcase, "%#{search_company}%".downcase).group("profiles.id")
-    elsif (search_school.present? && search_company.blank?)
-    	Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id').where('lower(educations.name) LIKE ?', "%#{search_school}%".downcase).group("profiles.id")
-    elsif (search_school.blank? && search_company.present?)
-    	Profile.joins('LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('lower(experiences.company_name) LIKE ?', "%#{search_company}%".downcase).group("profiles.id")
+	def self.search(search_school_company,search_location)
+    if (search_school_company.present? && search_location.present?)
+      Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('(lower(educations.name) LIKE ? OR lower(experiences.company_name) LIKE ?) AND (lower(profiles.city) LIKE ? OR lower(profiles.state) LIKE ? OR lower(profiles.country) LIKE ?)', "%#{search_school_company}%".downcase, "%#{search_school_company}%".downcase,"%#{search_location}%".downcase,"%#{search_location}%".downcase,"%#{search_location}%".downcase).group("profiles.id")
+    elsif (search_school_company.present? && search_location.blank?)
+    	Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('lower(educations.name) LIKE ? OR lower(experiences.company_name) LIKE ?', "%#{search_school_company}%".downcase, "%#{search_school_company}%".downcase).group("profiles.id")
+    elsif (search_school_company.blank? && search_location.present?)
+    	Profile.joins('LEFT OUTER JOIN educations ON educations.profile_id = profiles.id LEFT OUTER JOIN experiences ON experiences.profile_id = profiles.id').where('lower(profiles.city) LIKE ? OR lower(profiles.state) LIKE ? OR lower(profiles.country) LIKE ?', "%#{search_location}%".downcase, "%#{search_location}%".downcase, "%#{search_location}%".downcase).group("profiles.id")
     else
       Profile.all
     end

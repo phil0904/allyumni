@@ -5,6 +5,10 @@ div class="container main"
         =@profile.first_name
         |&nbsp;
         =@profile.last_name
+        -if @profile.linkedin_url.length!=0
+          =link_to image_tag("linkedin.png", :class=>'social-img'), @profile.linkedin_url
+        -if @profile.facebook_url.length!=0
+          =link_to image_tag("facebook.png",:class=>'social-img'), @profile.facebook_url
         
       hr class="colorgraph"
 

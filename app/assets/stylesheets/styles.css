@@ -1,5 +1,5 @@
 .navbar, .pos-f-t{
-  background-color: #324b8b;
+  background-color: #00305f;
   
 }
 .navbar-nav>li>a{
@@ -8,11 +8,19 @@
 .navbar-nav > .active > a{
   color:white!important;
 }
-.navbar-brand{
+.navbar-logo-name{
   color:white!important;
+  display: block;
+  float: left;
+  font-size: 26px;
+  margin-bottom: 0px;
+  margin-left: 5px;
 }
 .main{
   margin-top:80px;
+}
+.index-main{
+  margin-top:40px;
 }
 .text-left{
   text-align: right;
@@ -20,14 +28,14 @@
 .colorgraph {
   height: 5px;
   border-top: 0;
-  background: #c4e17f;
+  background: #d31245;
   border-radius: 5px;
-  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
-
+.social-img{
+  height: 44px;
+  margin-left: 10px;
+  padding-bottom: 5px;
+}
 .ui-autocomplete {
   background-color: white;
   cursor:pointer;
