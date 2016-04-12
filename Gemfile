@@ -34,6 +34,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # add rails_admin
 gem 'rails_admin'
+#add sendgrid
+gem 'sendgrid'
+#add newrelic
+gem 'newrelic_rpm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
