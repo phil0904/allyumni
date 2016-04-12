@@ -1,11 +1,12 @@
 .navbar, .pos-f-t{
-  background: #2d3e50;
+  background-color: #324b8b;
+  
 }
 .navbar-nav>li>a{
-  color:#6FBEF3!important;
+  color:white!important;
 }
 .navbar-nav > .active > a{
-  color:#2d3e50!important;
+  color:white!important;
 }
 .navbar-brand{
   color:white!important;
@@ -66,6 +67,23 @@ td{
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+.form-control-btn {
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
 .input-lg{height:46px;padding:10px 16px;font-size:18px;line-height:1.33;border-radius:6px;}
 select.input-lg{height:46px;line-height:46px;}
 textarea.input-lg{height:auto;}
+
+.hide{
+  display: none;
+}
+
+.seachbar{
+  padding-top: 69px;
+  padding-bottom: 15px;
+  background-color: #dde3f3;
+}

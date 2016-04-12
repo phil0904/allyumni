@@ -1,13 +1,24 @@
 class ProfilesController < ApplicationController
-  autocomplete :profile, :country, :scopes => [:unique_country]
-  autocomplete :profile, :city, :scopes => [:unique_city]
-  autocomplete :education, :name, :scopes => [:unique_name]
-  autocomplete :education, :major, :scopes => [:unique_major]
-  autocomplete :experience, :company_name, :scopes => [:unique_company_name]
-  autocomplete :experience, :title, :scopes => [:unique_title]
-  autocomplete :experience, :country, :scopes => [:unique_country]
-  autocomplete :experience, :city, :scopes => [:unique_city]
   before_action :authenticate_user!
+
+  def autocomplete_profile_country
+    render json: json_for_autocomplete(Profile.select(:country).distinct.where('LOWER(profiles.country) ILIKE ?', "%#{params[:term]}%"), :country)
+  end
+  def autocomplete_profile_city
+    render json: json_for_autocomplete(Profile.select(:city).distinct.where('LOWER(profiles.city) ILIKE ?', "%#{params[:term]}%"), :city)
+  end
+  def autocomplete_education_name
+    render json: json_for_autocomplete(Education.select(:name).distinct.where('LOWER(educations.name) ILIKE ?', "%#{params[:term]}%"), :name)
+  end
+  def autocomplete_education_major
+    render json: json_for_autocomplete(Education.select(:major).distinct.where('LOWER(educations.major) ILIKE ?', "%#{params[:term]}%"), :major)
+  end
+  def autocomplete_experience_company_name
+    render json: json_for_autocomplete(Experience.select(:company_name).distinct.where('LOWER(experiences.company_name) ILIKE ?', "%#{params[:term]}%"), :company_name)
+  end
+  def autocomplete_experience_title
+    render json: json_for_autocomplete(Experience.select(:title).distinct.where('LOWER(experiences.title) ILIKE ?', "%#{params[:term]}%"), :title)
+  end
 
 	def index
     @profiles=Profile.search(params[:search_school],params[:search_company])
@@ -25,12 +36,13 @@ class ProfilesController < ApplicationController
 
 	def create
     @profile = Profile.new(profile_params)
+    @profile.user = current_user
     if @profile.save
       flash[:notice] = "Successfully created profile."
     else
       redirect_to @profile and return
     end
-    render :action => 'new'
+    redirect_to profiles_path
 	end
 
   def edit
@@ -53,6 +65,6 @@ class ProfilesController < ApplicationController
 
   private
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :email, :phone, :country, :city, educations_attributes: [:id, :school_type, :name, :end_year, :major, :_destroy], experiences_attributes: [:id, :job_type, :company_name, :title, :country, :city, :start_month, :start_year, :end_month, :end_year, :is_present, :industry, :_destroy])
+      params.require(:profile).permit(:first_name, :last_name, :email, :phone, :country, :city, :state, educations_attributes: [:id, :school_type, :name, :end_year, :major, :_destroy], experiences_attributes: [:id, :job_type, :company_name, :title, :country, :city, :start_month, :start_year, :end_month, :end_year, :is_present, :industry, :_destroy])
     end
 end

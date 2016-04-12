@@ -1,4 +1,5 @@
 class EducationsController < ApplicationController
+
   def edit
     @education = Education.find(params[:id])
   end

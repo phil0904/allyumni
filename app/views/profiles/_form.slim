@@ -26,23 +26,25 @@ hr class="colorgraph"
   div class="row"
     div class="col-xs-6 col-sm-6 col-md-6"
       div class="form-group"
-        =f.autocomplete_field :country, autocomplete_profile_country_profiles_path, class:"form-control input-lg", placeholder: "Country"
-
+        =f.autocomplete_field :country, autocomplete_profile_country_profiles_path, class:"form-control input-lg country", placeholder: "Country"
     div class="col-xs-6 col-sm-6 col-md-6"
       div class="form-group"
         =f.autocomplete_field :city, autocomplete_profile_city_profiles_path, class:"form-control input-lg", placeholder: "City"
+    div class="col-xs-6 col-sm-6 col-md-6 profile-state hide"
+      div class="form-group"
+        =f.select(:state, ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],{prompt:'State'},{:class=>"form-control input-lg school-type"})
   h2 Education
   hr class="colorgraph"
   div class="education-container"
     = f.fields_for :educations do |e|
       div class="education"
         div class="form-group"
-          = e.select(:school_type, ['High School', 'Undergraduate', 'Graduate'],{prompt:'School Type'},{:class=>"form-control input-lg"})
+          = e.select(:school_type, ['High School', 'Undergraduate', 'Graduate'],{prompt:'School Type'},{:class=>"form-control input-lg school-type"})
 
         div class="form-group"
           =e.autocomplete_field :name, autocomplete_education_name_profiles_path, class:"form-control input-lg", placeholder: "School Name"
 
-        div class="form-group"
+        div class="form-group major"
           =e.autocomplete_field :major, autocomplete_education_major_profiles_path, class:"form-control input-lg", placeholder: "Major"
 
         div class="form-group"
@@ -65,25 +67,16 @@ hr class="colorgraph"
 
         div class="form-group"
           =exp.autocomplete_field :title, autocomplete_experience_title_profiles_path, class:"form-control input-lg", placeholder: "Job Title"
-        div class="form-group"
-          =exp.text_field :industry, class:"form-control input-lg", placeholder: "Industry"
         div class="row"
           div class="col-xs-6 col-sm-6 col-md-6"
             div class="form-group"
-              =exp.autocomplete_field :country, autocomplete_experience_country_profiles_path, class:"form-control input-lg", placeholder: "Country"
-          div class="col-xs-6 col-sm-6 col-md-6"
-            div class="form-group"
-              =exp.autocomplete_field :city, autocomplete_experience_city_profiles_path, class:"form-control input-lg", placeholder: "City"
-        div class="row"
-          div class="col-xs-6 col-sm-6 col-md-6"
-            div class="form-group"
-              = exp.select(:start_month, [['January', 1], ['February', 2], ['March', 3], ['April', 4], ['May', 5], ['June', 6], ['July', 7], ['August', 8], ['September', 9], ['October', 10], ['November', 11], ['December', 12]],{prompt:'End Month'},{:class=>"form-control input-lg"})
+              = exp.select(:start_month, [['January', 1], ['February', 2], ['March', 3], ['April', 4], ['May', 5], ['June', 6], ['July', 7], ['August', 8], ['September', 9], ['October', 10], ['November', 11], ['December', 12]],{prompt:'Start Month'},{:class=>"form-control input-lg"})
           div class="col-xs-6 col-sm-6 col-md-6"
             div class="form-group"
               =exp.text_field :start_year, class:"form-control input-lg", placeholder: "Start Year"
         div class="form-group"
           = exp.select(:is_present, [['Yes, I currently work here', true], ['No, I do not work here', false]], {prompt:'Do you currently work here?'},{:class=>"form-control input-lg present_option"})
-        div class="row" style="display:none;"
+        div class="row end-date" style="display:none;"
           div class="col-xs-6 col-sm-6 col-md-6"
             div class="form-group"
               = exp.select(:end_month, [['January', 1], ['February', 2], ['March', 3], ['April', 4], ['May', 5], ['June', 6], ['July', 7], ['August', 8], ['September', 9], ['October', 10], ['November', 11], ['December', 12]],{prompt:'End Month'},{:class=>"form-control input-lg"})
@@ -103,12 +96,72 @@ hr class="colorgraph"
     div class="col-xs-6 col-md-6"
       =f.submit 'Submit', :class=>"btn btn-primary btn-block btn-lg"
     div class="col-xs-6 col-md-6"
-      a href="#" class="btn btn-success btn-block btn-lg" Cancel
-    
+      a href="#" class="btn btn-secondary btn-block btn-lg" Cancel
+
+javascript:
+  $(function() {
+    $( document ).ready(function() {
+      $( '.present_option' ).each(function(i) {
+        if($(this).val() == 'false')
+          $(this).parents('.experience').children('.end-date').show();
+      });
+      $( '.school-type' ).each(function(i) {
+        if($(this).val() == 'High School')
+          $(this).parents('.education').children('.major').hide();
+      });
+      var country = $('.country').val().toLowerCase()
+      if(country == 'united states'||country == 'usa')
+        $('.country').parents('.row').children('.profile-state').show();
+    });
+    var edu_index = 0;
+    $('#add-education-btn').click(function(){
+      edu_index++;
+      var con = $('.education-container');
+      var template = $('#education-template').html();
+      var rendered = Mustache.render(template, {education_index: edu_index});
+      con.append(rendered);
+    });
+    var exp_index = 0;
+    $('#add-experience-btn').click(function(){
+      exp_index++;
+      var con = $('.experience-container');
+      var template = $('#experience-template').html();
+      var rendered = Mustache.render(template, {experience_index: exp_index});
+      con.append(rendered);
+    });
+    $('.country').focusout( function(){
+      var country = $('.country').val().toLowerCase()
+      if(country == 'united states'||country == 'usa')
+        $('.country').parents('.row').children('.profile-state').show();
+    });
+    $('body').on('click', '.delete-education-btn', function(delete_edu){
+      $(delete_edu.target).parents('.education').children('.delete_education').val(1);
+      $(delete_edu.target).parents('.education').hide();
+      edu_index--;
+    });
+    $('body').on('click', '.delete-experience-btn', function(delete_exp){
+      $(delete_exp.target).parents('.experience').children('.delete_experience').val(1);
+      $(delete_exp.target).parents('.experience').hide();
+      exp_index--;
+    });
+    $('body').on('change', '.present_option', function(exp){
+      if($(exp.target).val() == 'false')
+        $(exp.target).parents('.form-group').next().show();
+      if($(exp.target).val() == 'true')
+        $(exp.target).parents('.form-group').next().hide();
+    });
+    $('body').on('change', '.school-type', function(schooltype){
+      if($(schooltype.target).val() == 'High School')
+        $(schooltype.target).parents('.education').children('.major').hide();
+      else
+        $(schooltype.target).parents('.education').children('.major').show();
+    });
+  });    
 script id='education-template' type='x-tmpl-mustache'
   div class="education"
     div class="form-group"
-      select class="form-control input-lg" name="profile[educations_attributes][{{education_index}}][school_type]" id="profile_educations_attributes_{{education_index}}_school_type"
+      select class="form-control input-lg school-type" name="profile[educations_attributes][{{education_index}}][school_type]" id="profile_educations_attributes_{{education_index}}_school_type"
+        option value="" School Type
         option value="High School" High School
         option value="Undergraduate" Undergraduate
         option value="Graduate" Graduate
@@ -130,18 +183,9 @@ script id='experience-template' type='x-tmpl-mustache'
         option value="Part Time" Part Time
         option value="Full Time" Full Time
     div class="form-group"
-      input class="form-control input-lg" placeholder="Company Name" type="text" name="profile[experiences_attributes][{{experience_index}}][company_name]" id="profile_experiences_attributes_{{experience_index}}_company_name"
+      input class="form-control input-lg" placeholder="Company Name" data-autocomplete="/profiles/autocomplete_experience_company_name" type="text" name="profile[experiences_attributes][{{experience_index}}][company_name]" id="profile_experiences_attributes_{{experience_index}}_company_name"
     div class="form-group"
-      input class="form-control input-lg" placeholder="Job Title" type="text" name="profile[experiences_attributes][{{experience_index}}][title]" id="profile_experiences_attributes_{{experience_index}}_title"
-    div class="form-group"
-      input class="form-control input-lg" placeholder="Industry" type="text" name="profile[experiences_attributes][{{experience_index}}][industry]" id="profile_experiences_attributes_{{experience_index}}_industry"
-    div class="row"
-      div class="col-xs-6 col-sm-6 col-md-6"
-        div class="form-group"
-          input class="form-control input-lg" placeholder="Country" type="text" name="profile[experiences_attributes][{{experience_index}}][country]" id="profile_experiences_attributes_{{experience_index}}_country"
-      div class="col-xs-6 col-sm-6 col-md-6"
-        div class="form-group"
-          input class="form-control input-lg" placeholder="City" type="text" name="profile[experiences_attributes][{{experience_index}}][city]" id="profile_experiences_attributes_{{experience_index}}_city"
+      input class="form-control input-lg" placeholder="Job Title" data-autocomplete="/profiles/autocomplete_experience_title" type="text" name="profile[experiences_attributes][{{experience_index}}][title]" id="profile_experiences_attributes_{{experience_index}}_title"
     div class="row"
       div class="col-xs-6 col-sm-6 col-md-6"
         div class="form-group"
@@ -186,7 +230,7 @@ script id='experience-template' type='x-tmpl-mustache'
             option value="12" December
       div class="col-xs-6 col-sm-6 col-md-6"
         div class="form-group"
-          input class="form-control input-lg" placeholder="End Year" type="text" name="profile[experiences_attributes][{{experience_index}}][start_year]" id="profile_experiences_attributes_{{experience_index}}_start_year"
+          input class="form-control input-lg" placeholder="End Year" type="text" name="profile[experiences_attributes][{{experience_index}}][end_year]" id="profile_experiences_attributes_{{experience_index}}_end_year"
     input value="0" class="delete_experience" style="display:none;" type="text" name="profile[experiences_attributes][{{experience_index}}][_destroy]" id="profile_experiences_attributes_{{experience_index}}__destroy"
     div class="btn btn-danger btn-block delete-experience-btn" name="delete_experience{{experience_index}}" Delete Experiecne
     hr

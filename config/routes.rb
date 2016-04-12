@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   resources :profiles do
     resources :educations do
     end
@@ -13,10 +13,8 @@ Rails.application.routes.draw do
     get :autocomplete_education_major, :on => :collection
     get :autocomplete_experience_company_name, :on => :collection
     get :autocomplete_experience_title, :on => :collection
-    get :autocomplete_experience_country, :on => :collection
-    get :autocomplete_experience_city, :on => :collection
   end
-  root 'profiles#new'
+  root 'profiles#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
