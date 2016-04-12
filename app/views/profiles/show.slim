@@ -13,21 +13,21 @@ div class="container main"
       h6
         =@profile.phone
       h6
-        =@profile.country
-      h6
         =@profile.city
-        -if @profile.state
+        -if @profile.state.length!=0
           |,&nbsp;
           =@profile.state
+      h6
+        =@profile.country
       hr
       h3 Education
       hr class="colorgraph"
       - @profile.educations.each do |education|
         h4
           =education.name
-
-        h6
-          =education.major
+        -if education.school_type!='High School'
+          h6
+            =education.major
 
         h6
           |Graduation Year:&nbsp
