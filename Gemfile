@@ -34,8 +34,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # add rails_admin
 gem 'rails_admin'
-#add sendgrid
-gem 'sendgrid'
 #add newrelic
 gem 'newrelic_rpm'
 #for app rename
