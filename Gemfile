@@ -38,6 +38,8 @@ gem 'rails_admin'
 gem 'sendgrid'
 #add newrelic
 gem 'newrelic_rpm'
+#for app rename
+gem 'rename'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
