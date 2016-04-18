@@ -6,9 +6,9 @@ div class="container main"
         |&nbsp;
         =@profile.last_name
         -if @profile.linkedin_url.length!=0
-          =link_to image_tag("linkedin.png", :class=>'social-img'), @profile.linkedin_url
+          =link_to image_tag("linkedin.png", :class=>'social-img'), @profile.linkedin_url, :target => "_blank"
         -if @profile.facebook_url.length!=0
-          =link_to image_tag("facebook.png",:class=>'social-img'), @profile.facebook_url
+          =link_to image_tag("facebook.png",:class=>'social-img'), @profile.facebook_url, :target => "_blank"
         
       hr class="colorgraph"
 
