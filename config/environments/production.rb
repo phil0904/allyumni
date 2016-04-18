@@ -77,6 +77,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  sendgrid_client = SendGrid::Client.new(api_user: "app49177593@heroku.com", api_key: "aykxr3wb3075")
-
 end
