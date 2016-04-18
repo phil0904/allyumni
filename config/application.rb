@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'sendgrid-ruby'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -24,7 +23,5 @@ module Alumconnect
     config.active_record.raise_in_transactional_callbacks = true
 
     config.serve_static_assets = true
-
-    client = SendGrid::Client.new(api_key: 'bg-oMfkwTpKdvsN53OB2EQ')
   end
 end
