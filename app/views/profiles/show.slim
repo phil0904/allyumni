@@ -18,7 +18,7 @@ div class="container main"
         =@profile.phone
       h6
         =@profile.city
-        -if @profile.state.length!=0
+        -if @profile.state.nil?
           |,&nbsp;
           =@profile.state
       h6

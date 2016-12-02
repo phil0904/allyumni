@@ -33,7 +33,7 @@ div class="container index-main"
                 td
                   =profile.city
                   |,&nbsp
-                  -if profile.state.length!=0
+                  -if profile.state.nil?
                     =profile.state
                   -else
                     =profile.country
